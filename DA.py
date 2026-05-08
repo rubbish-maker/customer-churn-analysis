@@ -93,7 +93,7 @@ X = scaler.fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 5. 建模
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression(max_iter=1000,class_weight='balanced')
 model.fit(X_train, y_train)
 
 # 6. 评估
@@ -117,7 +117,7 @@ X_all_scaled = scaler.fit_transform(X_all)
 X_train, X_test, y_train, y_test = train_test_split(X_all_scaled, y, test_size=0.2, random_state=42)
 
 # 5. 建模
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression(max_iter=1000,class_weight='balanced')
 model.fit(X_train, y_train)
 
 # 6. 评估
@@ -136,9 +136,7 @@ print(coef_df.to_string())
 
 
 # ⭐ 单独给RF用的X（不要标准化）
-X_rf = df[['Credit_Balance', 'Lifetime_Value', 
-           'Cart_Abandonment_Rate', 'Average_Order_Value', 
-           'Days_Since_Last_Purchase']]
+X_rf = df.select_dtypes(include=['number']).drop('Churned', axis=1)
 
 X_rf = X_rf.fillna(X_rf.mean())
 
@@ -151,7 +149,8 @@ X_train_rf, X_test_rf, y_train_rf, y_test_rf = train_test_split(X_rf, y, test_si
 
 # 训练RF
 from sklearn.ensemble import RandomForestClassifier
-rf = RandomForestClassifier(n_estimators=100)
+rf = RandomForestClassifier(n_estimators=100,class_weight='balanced',
+                            random_state=42)
 rf.fit(X_train_rf, y_train_rf)
 
 # Feature importance ⭐
@@ -162,6 +161,24 @@ importance = pd.DataFrame({
 }).sort_values(by='Importance', ascending=False)
 
 print(importance)
+
+import matplotlib.pyplot as plt
+
+# 取前10个最重要变量
+top10 = importance.head(10)
+
+# 画图
+plt.figure(figsize=(8,6))
+plt.barh(top10['Feature'], top10['Importance'])
+
+plt.xlabel("Importance")
+plt.ylabel("Feature")
+plt.title("Random Forest Feature Importance")
+
+plt.gca().invert_yaxis()
+
+plt.tight_layout()
+plt.show()
 
 # ===== RF 分类报告 =====
 
