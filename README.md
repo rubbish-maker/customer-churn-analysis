@@ -46,21 +46,26 @@ Boxplots were used to visualize distribution differences between churned and non
 
 ## Machine Learning Models
 
-### Logistic Regression
+### 1. Logistic Regression
+Used to identify interpretable factors associated with customer churn.
 
-Used for interpretable churn prediction and coefficient analysis.
+Key findings:
+- Higher cart abandonment rate increased churn risk
+- Longer inactivity periods increased churn risk
+- Higher purchase frequency reduced churn risk
 
-Result:
+### 2. Random Forest Classifier
+Built a predictive churn classification model using all numerical behavioral features.
 
-- Accuracy: ~0.78
+Model improvements included:
+- Using full-feature training instead of only selected variables
+- Applying class balancing to improve minority-class recall
+- Evaluating feature importance for business interpretation
 
-### Random Forest Classifier
-
-Used for non-linear pattern learning and feature importance analysis.
-
-Result:
-
-- Accuracy: ~0.79–0.91
+Final Random Forest Performance:
+- Accuracy: 0.91
+- Recall (Churned Users): 0.76
+- F1-score: 0.84
 
 ---
 
