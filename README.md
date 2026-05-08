@@ -76,6 +76,16 @@ Important churn-related features include:
 
 Customers with higher cart abandonment and longer inactivity periods were more likely to churn.
 
+## Key Predictive Features
+
+Random Forest feature importance analysis identified the following major predictors of customer churn:
+
+- Cart Abandonment Rate
+- Lifetime Value
+- Days Since Last Purchase
+- Email Open Rate
+- Login Frequency
+
 ---
 
 ## Technologies Used
