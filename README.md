@@ -34,7 +34,7 @@ Performed exploratory data analysis to compare churned and retained customers.
 
 Variables with larger mean differences between churn groups were further selected for visualization and modeling.
 
-Selected features included:
+Selected variables for initial visualization included:
 
 - Cart Abandonment Rate
 - Lifetime Value
@@ -43,6 +43,11 @@ Selected features included:
 - Average Order Value
 
 Boxplots were used to visualize distribution differences between churned and non-churned users.
+
+## Example Behavioral Difference
+
+<img width="772" height="551" alt="image" src="https://github.com/user-attachments/assets/2fa5df0b-62f2-499f-bfb2-eadb0995f08d" />
+
 
 ## Machine Learning Models
 
@@ -71,15 +76,12 @@ Final Random Forest Performance:
 
 ## Key Findings
 
-Important churn-related features include:
+Customers with:
+- higher cart abandonment
+- lower engagement
+- longer inactivity periods
 
-- Cart Abandonment Rate
-- Lifetime Value
-- Days Since Last Purchase
-- Customer Service Calls
-- Returns Rate
-
-Customers with higher cart abandonment and longer inactivity periods were more likely to churn.
+showed higher churn tendency.
 
 ## Key Predictive Features
 
@@ -90,6 +92,8 @@ Random Forest feature importance analysis identified the following major predict
 - Days Since Last Purchase
 - Email Open Rate
 - Login Frequency
+  
+<img width="1137" height="849" alt="image" src="https://github.com/user-attachments/assets/ce999a19-cdfc-4411-b390-08e5f40cf243" />
 
 ---
 
@@ -99,6 +103,7 @@ Random Forest feature importance analysis identified the following major predict
 - pandas
 - matplotlib
 - scikit-learn
+- numpy
 
 ---
 
@@ -114,6 +119,9 @@ DA/
 ```
 
 ---
+## Model Limitations
+
+Although Random Forest achieved strong predictive performance, customer churn behavior remains partially complex and may require additional behavioral or temporal features for further improvement.
 
 ## Future Improvements
 
