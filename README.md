@@ -46,7 +46,8 @@ Boxplots were used to visualize distribution differences between churned and non
 
 ## Example Behavioral Difference
 
-![Boxplot](images/cart_abandonment_boxplot.png)
+<img width="432" height="288" alt="Cart_Abandonment_Rate_boxplot" src="https://github.com/user-attachments/assets/dba7cfb3-6db2-44ec-bd44-340718340296" />
+
 *Outliers were optionally hidden in selected visualizations to improve readability of the core distribution.*
 
 ## Machine Learning Models
@@ -93,8 +94,7 @@ Random Forest feature importance analysis identified the following major predict
 - Email Open Rate
 - Login Frequency
   
-![Boxplot](images/feature_importance.png)
-
+<img width="2400" height="1800" alt="feature_importance" src="https://github.com/user-attachments/assets/56201fce-9133-446d-b01e-9257260b747d" />
 ---
 
 ## Technologies Used
