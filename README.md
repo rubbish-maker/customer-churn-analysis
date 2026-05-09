@@ -45,9 +45,9 @@ Selected variables for initial visualization included:
 Boxplots were used to visualize distribution differences between churned and non-churned users.
 
 ## Example Behavioral Difference
-
+ 
 <img width="772" height="551" alt="image" src="https://github.com/user-attachments/assets/2fa5df0b-62f2-499f-bfb2-eadb0995f08d" />
-
+*Outliers were optionally hidden in selected visualizations to improve readability of the core distribution.*
 
 ## Machine Learning Models
 
