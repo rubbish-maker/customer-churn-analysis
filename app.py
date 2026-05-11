@@ -17,7 +17,6 @@ st.set_page_config(page_title="Churn Predictor Pro", layout="wide")
 # =========================
 @st.cache_resource
 def load_model_and_data():
-    # 读取数据 (请确保文件名正确)
     df = pd.read_csv("ecommerce_customer_churn_dataset.csv")
     
     features = ['Credit_Balance', 'Lifetime_Value', 'Cart_Abandonment_Rate', 
@@ -26,27 +25,19 @@ def load_model_and_data():
     X = df[features].fillna(df[features].mean())
     y = df['Churned']
 
-# 划分训练集和测试集
     from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42)
+        X, y, test_size=0.2, random_state=42)
 
-# 训练模型
     rf = RandomForestClassifier(
-    n_estimators=100,
-    class_weight='balanced',
-    random_state=42
-)
-
+        n_estimators=100,
+        class_weight='balanced',
+        random_state=42
+    )
     rf.fit(X_train, y_train)
 
-# SHAP解释器
     explainer = shap.TreeExplainer(rf)
 
-# 返回训练和测试数据
     return df, X_train, X_test, y_train, y_test, rf, explainer
 
 # =========================
@@ -66,8 +57,17 @@ df, X_train, X_test, y_train, y_test, rf, explainer = load_model_and_data()
 # 网页界面
 # =========================
 st.title("Customer Churn Prediction App")
-st.caption("Top 5 predictive features selected based on mean difference analysis between churned and retained customers.")
+
+st.caption(
+    "Interactive prediction using the top churn-related behavioral features."
+)
 col1, col2 = st.columns(2)
+st.write("### Customer Summary")
+
+st.caption(
+    "Customers with high cart abandonment and long inactivity periods tend to show elevated churn risk."
+)
+
 with col1:
     credit_balance = st.number_input("Credit Balance", value=2000.0)
     lifetime_value = st.number_input("Lifetime Value", value=1400.0)
@@ -124,12 +124,22 @@ if st.button("Predict Churn Risk", type="primary"):
 st.divider()
 st.subheader("General Model Trends")
 
+
 # 调用带缓存的 SHAP 计算函数
 global_shap_values, sample_X = get_global_shap(explainer, X_train)
 
 tab1, tab2 = st.tabs(["Feature Explanation", "Model Performance"])
 
 with tab1:
+    st.subheader("Feature Explanation")
+    st.caption(
+    "Red indicates higher feature values, blue indicates lower values."
+)
+
+    st.caption(
+    "Features pushing predictions toward churn appear on the right."
+)
+
     fig_global, ax_global = plt.subplots(figsize=(10, 5))
     shap.summary_plot(
         global_shap_values[:, :, 1],
